@@ -1,0 +1,27 @@
+name: Build u-boot binaries
+run-name: ${{ github.actor }}
+on: [push]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        defconfig: [ "mstar_pioneer3_dongshanpipicow_usbupdater_defconfig" ]
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v3
+        with:
+          submodules: true
+      - name: Install deps
+        run: sudo apt-get install flex bison gcc-arm-linux-gnueabihf
+      - name: Configure
+        run: make CROSS_COMPILE=arm-linux-gnueabihf- ${{ matrix.defconfig }}
+        working-directory: u-boot
+      - name: Compile
+        run: make CROSS_COMPILE=arm-linux-gnueabihf- u-boot.img
+        working-directory: u-boot
+      - name: Archive
+        uses: actions/upload-artifact@v3
+        with:
+          name: ${{ matrix.defconfig }}-u-boot.img
+          path: u-boot/u-boot.img
