@@ -17,3 +17,6 @@ You will need the following:
 ```
 p3udl --ipl=<path to usb_updater.bin> --uboot=<path to the u-boot.img>
 ```
+
+- Once u-boot is running you can use u-boot as if booted from local storage
+- You probably want to use the 'dfu' support in u-boot along with 'dfu-util' to upload images but ymodem etc works too.
