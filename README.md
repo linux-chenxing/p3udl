@@ -8,6 +8,16 @@ You will need the following:
 
 ## Building
 
+Like any other meson project.
+
+```
+<check out the code>
+meson setup builddir
+meson compile -C builddir
+```
+
+`p3udl` binary will be at `builddir/src/p3udl`
+
 ## Usage
 
 - Reset the board with the USB boot strap.
